@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team3863.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,11 +19,29 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the build.properties file in the
  * project.
  */
+
+
+
+
 public class Robot extends IterativeRobot {
+	WPI_TalonSRX LeftTalonA = new WPI_TalonSRX(13);
+	WPI_TalonSRX RightTalonA = new WPI_TalonSRX(2);
+	WPI_TalonSRX LeftTalonB = new WPI_TalonSRX(12);
+	WPI_TalonSRX RightTalonB = new WPI_TalonSRX(3);
+	
+	
 	private static final String kDefaultAuto = "Default";
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
+	
+	private void motorspeed(double left, double right) {
+		LeftTalonA.set(left);
+		LeftTalonB.set(left);
+		RightTalonA.set(right * -1);
+		RightTalonB.set(right * -1);
+		
+	}
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -59,15 +78,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		switch (m_autoSelected) {
-			case kCustomAuto:
-				// Put custom auto code here
-				break;
-			case kDefaultAuto:
-			default:
-				// Put default auto code here
-				break;
-		}
+		
+		motorspeed(1, -1);
+		
 	}
 
 	/**
@@ -75,6 +88,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		motorspeed(1, 1);
+		
 	}
 
 	/**
@@ -82,5 +97,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		
+		
+		motorspeed(-1, -1);
 	}
 }
