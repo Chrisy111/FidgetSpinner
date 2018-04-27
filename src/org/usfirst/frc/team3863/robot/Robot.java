@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,8 +30,12 @@ public class Robot extends IterativeRobot {
 	WPI_TalonSRX LeftTalonB = new WPI_TalonSRX(12);
 	WPI_TalonSRX RightTalonB = new WPI_TalonSRX(3);
 	
+	Joystick joy1 = new Joystick(1);
+	
+	
 	
 	private static final String kDefaultAuto = "Default";
+	
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
@@ -88,7 +93,24 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		motorspeed(1, 1);
+		double forward = joy1.getRawAxis(1)* -1;
+		if(Math.abs(forward)< 0.05) {
+			forward = 0;
+		}
+		System.out.println(forward);
+		
+		
+		double lr = joy1.getRawAxis(2)* -1;
+		if(Math.abs(forward)< 0.05) {
+			forward = 0;}
+		
+		
+		double leftwheels = forward + lr * -1;
+		double rightwheels = forward + lr;
+		motorspeed(leftwheels, rightwheels);
+		
+		
+		
 		
 	}
 
