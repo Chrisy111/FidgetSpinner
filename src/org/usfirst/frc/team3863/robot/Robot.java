@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -32,7 +33,7 @@ public class Robot extends IterativeRobot {
 	
 	Joystick joy1 = new Joystick(1);
 	
-	
+	DoubleSolenoid transmission = new DoubleSolenoid(4 , 5);
 	
 	private static final String kDefaultAuto = "Default";
 	
