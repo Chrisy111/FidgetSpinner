@@ -110,9 +110,17 @@ public class Robot extends IterativeRobot {
 		double rightwheels = forward + lr;
 		motorspeed(leftwheels, rightwheels);
 		
+		if(joy1.getRawButton(3)) {
+			transmission.set(DoubleSolenoid.Value.kForward);
+			
 		
+		}
 		
+		else {
+			
 		
+		transmission.set(DoubleSolenoid.Value.kReverse);
+		}
 	}
 
 	/**
